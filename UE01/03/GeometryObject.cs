@@ -124,16 +124,11 @@ namespace GO
         }
 
         public string output() {
-            string[] objectStrings = new string[objectList.Count];
-            for (int i = 0; i < objectList.Count; i++) {
-                objectStrings[i] = objectList[i].draw();
-            }
             string output = "convert -size " + this.width + "x" + this.height + " xc:transparent -draw \"fill " + this.color + " rectangle 0,0 " + this.width + "," + this.height + " ";
-            foreach(string s in objectStrings) {
-                output += s + " ";
+            foreach (GeometryObject g in objectList) {
+                output += objectList[i].draw() + " ";
             }
-            output += "\"";
-            return output;
+            return output + "\"";;
         }
     }
 }
