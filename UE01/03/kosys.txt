@@ -1,0 +1,15 @@
+rectangle center 100,100	width 80	height 40
+
+lo: 60, 80 ru 140, 120
+
+
+square center 300, 100		width 100
+lo: 250, 50 ru: 350, 150 
+
+
+	   | -y
+-x	   |       +x
+-------|--------
+	   |
+	   |
+	   | +y 
