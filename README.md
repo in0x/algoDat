@@ -1,6 +1,6 @@
 # algoDat
 
-*These are the solutions to the coursework for my second semester Algorithms and Data Structures class, written in C#
+These are the solutions to the coursework for my second semester Algorithms and Data Structures class, written in C#. 
 The tasks are in german, so at some point I'll hopefully translate them. In the meantime just contact me if you need a translation
 
 ## Licence
