@@ -4,10 +4,11 @@ using System.Collections.Generic;
 
 namespace GO
 {
+    //Base class for all image objects
     public abstract class GeometryObject
     {
-        public string color {get; internal set;}
-        public Vector center {get; internal set;}
+        public string color {get; private set;}  
+        public Vector center {get; private set;}
 
         public GeometryObject(string _color, Vector _center)
         {
@@ -20,8 +21,8 @@ namespace GO
 
     public class Rectangle : GeometryObject
     {
-        public double width;
-        public double height;
+        private double width;
+        private double height;
 
         public Rectangle(double _width, double _height, string _color, Vector _center) : base(_color, _center) 
         {
@@ -55,7 +56,7 @@ namespace GO
 
     public class Circle : GeometryObject
     {
-        double radius;
+        private double radius;
 
         public Circle(double _radius, string _color, Vector _center) : base(_color, _center) {
             radius = _radius;
@@ -81,7 +82,7 @@ namespace GO
 
     public class Square : GeometryObject
     {
-        double width;
+        private double width;
 
         public Square(double _width, string _color, Vector _center) : base(_color, _center) {
             width = _width;
@@ -126,9 +127,9 @@ namespace GO
         public string output() {
             string output = "convert -size " + this.width + "x" + this.height + " xc:transparent -draw \"fill " + this.color + " rectangle 0,0 " + this.width + "," + this.height + " ";
             foreach (GeometryObject g in objectList) {
-                output += objectList[i].draw() + " ";
+                output += g.draw() + " ";
             }
-            return output + "\"";;
+            return output + "\" ouput.gif";;
         }
     }
 }

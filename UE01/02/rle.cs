@@ -4,6 +4,7 @@ using System.Globalization;
 static class RLE {
 	public static string escapeChar = "#";
 
+	//Returns a RLE-encoded string
 	public static string encode(string input) {
 		string output = "";
 		string buffer = "";
@@ -12,7 +13,7 @@ static class RLE {
 			buffer += input[i];
 			if (input[i] == input[i + 1]) {
 				counter++;
-			} 
+			} 	
 			if (input[i] != input[i + 1] || i == input.Length - 2) { 
 				if (counter >= 4) {
 					output += input[i] + escapeChar + counter.ToString() + escapeChar;
@@ -29,6 +30,7 @@ static class RLE {
 		return output;
 	}
 
+	//Returns a RLE-decoded string
 	public static string decode(string input) {
 		string output = "";
 		for (int i = 0; i < input.Length; i++) {

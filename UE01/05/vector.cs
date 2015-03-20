@@ -1,5 +1,6 @@
 using System;
 namespace myVector {
+
 	public struct Vector {
 		public double x;
 		public double y;
