@@ -2,8 +2,7 @@ using System;
 using Pgm;
 using System.Diagnostics;
 
-namespace PgmEdit {
-//Oh despair, ye who shall abstract this, for if you gaze into PgmEdit.crop(), PgmEdit.crop() also gazes into you  
+namespace PgmEdit {	
 	static class MainClass {
 		static void Main() {
 			try {
