@@ -4,8 +4,10 @@ using System.Collections.Generic;
 
 class MainClass {
 
-	static void Main(string[] args) {
-		if(args.Length == 0) {
+	static void Main(string[] args) 
+	{
+		if(args.Length == 0) 
+		{
 			WriteLine("Usage:\n\tpassword.exe [low] [high] [maxN]\n\tlow ... lowest ASCII-Code\n\thigh ... highest\n\tmaxN ... max pwd length");
 			return;
 		}
@@ -16,7 +18,8 @@ class MainClass {
 		WriteLine(myList.Count);
 	}
 
-	static void printAll(String current, int length, List<string> list, char start, char end) {
+	static void printAll(String current, int length, List<string> list, char start, char end) 
+	{
     	WriteLine(current);
     	if (current.Length > 2) list.Add(current);
     	if (current.Length < length)
