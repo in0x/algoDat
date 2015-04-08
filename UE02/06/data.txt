@@ -1,0 +1,56 @@
+Gegeben 
+sind 
+zwei 
+Algorithmen 
+(resp. Datenstrukturen) 
+fur 
+das 
+gleiche 
+Problem 
+Welcher 
+ist 
+schneller?
+”Einfacher 
+Ansatz“: 
+Man 
+macht 
+Laufzeitmessungen. 
+Mit 
+welchem 
+Input?
+􏰀Randomisierte 
+(zufalliggenerierte)
+Daten:Liefern 
+Aussagen u ber die 
+mittlere Laufzeit. 
+Bei 
+großen 
+Eingaben 
+kommen 
+besonders gute oder 
+schlechte Eingaben 
+meist mit 
+hoher 
+Wahrscheinlichkeit 
+nicht vor.
+􏰀Reale Daten fur konkrete Anwendungen: 
+Liefern Aussagen 
+uber reale Laufzeiten. 
+Konnen von den
+mittleren Laufzeiten 
+deutlich 
+abweichen. 
+(Fur manche Probleme sind reale Daten schwer zu bekommen.)
+􏰀Unnatu rliche/konstruierte Daten: 
+Liefern eventuell 
+Hinweise darauf, 
+wann ein Algorithmus 
+besonders 
+schnell oder 
+langsam ist. (
+zB Sortiere
+n: bereits vo
+rsortiert
+e oder ko
+nstante 
+Daten)

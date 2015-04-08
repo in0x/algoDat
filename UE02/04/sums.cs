@@ -6,7 +6,7 @@ class MainClass
 	static void Main(string[] args)
 	{		
 		WriteLine(sumCircles(5));
-		WriteLine(sumSquares(2));
+		WriteLine(sumSquares(5));
 	}
 
 	static double sumCircles(double depth) 
