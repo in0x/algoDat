@@ -9,8 +9,10 @@ $(document).ready(function () {
 
   function position (depth, index) {
     var node = {}
+    // X needs to grow with every index be equally distributed across the width relative to the amount of nodes
     node.x = index * myTree.canvasWidth / (Math.pow(2, depth) + 1)
-    node.y = (depth * myTree.canvasHeight / myTree.treeDepth) + 15
+    // Y needs to grow with every level and be equally distributed across the  height relative to the depth
+    node.y = (depth * myTree.canvasHeight / myTree.treeDepth) + 15 
     node.depth = depth
     node.index = index
     return node
