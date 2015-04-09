@@ -1,0 +1,17 @@
+ 	Verify hexadecimal numbers regex:	
+	0[xX][0-9a-fA-F]+
+
+	First, any character (except \n) with one number after it:
+	.\d
+
+	Then, any character (except \n) with two numbers after it:
+	.\d\d
+
+	Finally, any character (except \n) with atlas one or more numbers after it:
+	.\d{1,}
+	
+	// Find html <string> and exclude tags
+	// (?![<p>])(.|\n)*(?=</p>) 	
+
+	Find 3 or more word characters in a row:
+	\w{3,}

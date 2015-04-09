@@ -23,6 +23,20 @@ $(document).ready(function () {
     sierpinski(triangles, depth - 1)
   }
 
+  function sierpinski (triangles, depth) {
+    if (depth == 0)
+    return
+    triangles.forEach(function (t) {
+      var mAB = middlePoint(t.A, t.B),
+        mAC = middlePoint(t.A, t.C),
+        mBC = middlePoint(t.B, t.C)
+      triangles.push(new Triangle(t.A, mAB, mAC),
+        new Triangle(mAB, t.B, mBC),
+        new Triangle(mAC, mBC, t.C))
+    })
+    sierpinski(triangles, depth - 1)
+  }
+
   function draw (triangle) {
     triangle.forEach(function (t) {
       context.beginPath()
@@ -36,7 +50,6 @@ $(document).ready(function () {
       context.lineTo(t.C.x, t.C.y)
       context.stroke()
     })
-
   }
 
   var c = document.getElementById('canvas')
