@@ -1,3 +1,6 @@
+/* 1410601024, fhs37246
+   * Philipp Welsch
+   * ue02 bsp11    */
 using System;
 using System.Console;
 using System.Diagnostics;
@@ -24,5 +27,11 @@ class MainClass
 
 			Debug.Assert(test.Count == 5 ,"test.Count not 5 after adding");
 			Debug.Assert(test.Capacity == 8, "test.Capacity did not double");
+
+			test.RemoveAt(3);
+			Debug.Assert(test.Content[3] == "Hello Internet.", "RemoveAt not working at 3");
+			
+			test.Insert("Finish him", 2);
+			Debug.Assert(test.Content[2] == "Finish him", "Insert not working at 2");
 	}
 }

@@ -1,3 +1,6 @@
+/* 1410601024, fhs37246
+   * Philipp Welsch
+   * ue02 bsp08 	*/
 using System;
 using System.Console;
 using System.Collections.Generic;
@@ -24,6 +27,9 @@ class MainClass {
     	if (current.Length > 2) list.Add(current);
     	if (current.Length < length)
         	for (char c = start; c <= end; c++)
+        		//if (!current.Contains(c.ToString()))
+            	//	printAll(current + c, length, list, start, end);
+            	//Enable the above for unique mode
             	printAll(current + c, length, list, start, end);
 	}
 }

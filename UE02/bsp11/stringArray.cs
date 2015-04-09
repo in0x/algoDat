@@ -58,7 +58,7 @@ namespace MyStringArray {
 			count++;
 		}
 
-		public void Resize(int size) 
+		private void Resize(int size) 
 		{
 			string[] temp = new string[size];
 			for (int index = 0; index < content.Length; index++) 
@@ -71,21 +71,27 @@ namespace MyStringArray {
 
 		public void Insert(string s, int position) 
 		{
-			if (position < 0) 
-				throw new Exception("Cannot add at negative index");
-			if (position >= count) 
+			if (position < 0 || position > Count) 
+				throw new ArgumentOutOfRangeException();
+			if (position == count) 
 				Add(s);
+			if (count + 1 > capacity)
+				Resize(content.Length * 2);
 			else 
 			{
 				string[] temp = new string[content.Length];
-				for (int index = 0; index <= position; index++) 
+				for (int index = 0; index < position; index++) 
 				{
-					if (index == position) 
-					{
-						content[index] = s;
-						continue;
-					}
 					temp[index] = content[index];
+				}
+
+				temp[position] = s;
+
+				for (int index = position; index < content.Length; index++)
+				{
+					if (content[index] == null)
+						break;
+					temp[index + 1] = content[index];
 				}
 				content = temp;
 			}
@@ -93,13 +99,18 @@ namespace MyStringArray {
 
 		public bool RemoveAt(int position) 
 		{
-			if (position > Capacity || position < 0) return false;
+			if (position < 0 || position >= Count)
+				throw new ArgumentOutOfRangeException();
+			if (position > Capacity) return false;
 			string[] temp = new string[content.Length];
-			for(int index = 0; index < position; index++)
+			for (int index = 0; index < position; index++)
 			{
 				temp[index] = content[index];
-				temp[content.Length - index] = content[content.Length - index];
-			}
+			} 
+			for (int index = position + 1; index < content.Length; index++)
+			{
+				temp[index - 1] = content[index];
+			} 
 			content = temp;
 			return true;
 		}

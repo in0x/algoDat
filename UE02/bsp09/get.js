@@ -1,3 +1,7 @@
+/* 1410601024, fhs37246
+   * Philipp Welsch
+   * ue02 bsp09    */
+   
 $(document).ready(function () {
   var c = document.getElementById('canvas')
   var context = c.getContext('2d')

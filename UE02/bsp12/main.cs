@@ -1,3 +1,6 @@
+/* 1410601024, fhs37246
+   * Philipp Welsch
+   * ue02 bsp12    */
 using System;
 using System.Console;
 using System.Diagnostics;

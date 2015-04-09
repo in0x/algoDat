@@ -1,4 +1,6 @@
-//comment
+/* 1410601024, fhs37246
+   * Philipp Welsch
+   * ue02 bsp07    */
 using System;
 using System.Diagnostics;
 
@@ -15,16 +17,13 @@ class MainClass
 	static class rec 
 	{
 		public static int sum(int n) 
-		{
-			if (n > 0) return n + sum(n - 1);
-			else return 0;
-			//if (n > 0) ? return n + sum(n - 1) : return 0;
+		{	
+			return (n > 0) ? n + sum(n - 1) : 0;
 		}
 
 		public static double pow(double x, uint n) 
 		{
-			if (n == 0) return 1;
-			else return x * pow(x, n - 1); 
+			return n == 0 ? 1 : x * pow(x, n - 1); 
 		}
 
 		public static void cd(int n) 

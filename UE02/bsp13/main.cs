@@ -1,9 +1,11 @@
+/* 1410601024, fhs37246
+   * Philipp Welsch
+   * ue02 bsp13    */
 using System;
 using System.Console;
 
 class MainClass 
 {
-	//Jede Ziffer in jeder Spalte und Zeile 1x
 	static void Main()
 	{
 		byte[,] sudoku = new byte[9,9] {
