@@ -23,20 +23,28 @@ $(document).ready(function () {
     sierpinski(triangles, depth - 1)
   }
 
-  function sierpinski (triangles, depth) {
+  function sum(x) {
+    if (x == 0)
+      return 1
+    return Math.pow(3, x) + sum(x - 1)
+  }
+
+  function sierpinski_new (triangles, depth) {
     if (depth == 0)
     return
-    triangles.forEach(function (t) {
+    for (var i = sum(depth - 1); i < triangles.length; i++) {
+      var t = triangles[i] 
       var mAB = middlePoint(t.A, t.B),
         mAC = middlePoint(t.A, t.C),
         mBC = middlePoint(t.B, t.C)
       triangles.push(new Triangle(t.A, mAB, mAC),
         new Triangle(mAB, t.B, mBC),
         new Triangle(mAC, mBC, t.C))
-    })
+    }
     sierpinski(triangles, depth - 1)
   }
 
+  // 3 ^ depth
   function draw (triangle) {
     triangle.forEach(function (t) {
       context.beginPath()
@@ -57,9 +65,14 @@ $(document).ready(function () {
   context.fillStyle = '#000'
   context.lineWidth = 0.5
 
-  var elements = []
-  elements.push(new Triangle({x: 600, y: 1000}, {x: 1400, y: 1000}, {x: 1000, y: 350}))
-  sierpinski(elements, 7)
-  draw(elements)
+  //var elements = []
+  var el_more = []
+  //elements.push(new Triangle({x: 600, y: 1000}, {x: 1400, y: 1000}, {x: 1000, y: 350}))
+  el_more.push(new Triangle({x: 600, y: 1000}, {x: 1400, y: 1000}, {x: 1000, y: 350}))
+  //sierpinski(elements, 6)
+  sierpinski_new(el_more, 7)
+  //console.log(elements.length)
+  console.log(el_more.length)
+  draw(el_more)
 
 })
