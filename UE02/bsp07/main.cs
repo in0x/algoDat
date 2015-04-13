@@ -9,7 +9,7 @@ class MainClass
 	static void Main() 
 	{
 		Console.WriteLine(rec.sum(4));
-		Console.WriteLine(rec.pow(3, 4));
+		Console.WriteLine(rec.pow(3, 0));
 		Debug.Assert(rec.sum(4) == ((4 * 4 + 4)/2));
 		rec.cd(4);
 	}
