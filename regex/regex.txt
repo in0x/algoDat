@@ -15,3 +15,6 @@
 
 	Find 3 or more word characters in a row:
 	\w{3,}
+
+	email
+	(\w|-|\.){1,}@(\w|\.|-){1,}
