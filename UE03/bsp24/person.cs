@@ -31,8 +31,11 @@ class Person : IComparable {   // IComparable needed for LinkedList<T>.Sort() !
 		//if LNames are the same, FName is used.
 		//if FName are the same, BDay is used.
 		if (LName.CompareTo(other.LName) == 0) { //same last names
-			if (FName.CompareTo(other.LName) == 0) { //same first names
-				return BDay.CompareTo(other.BDay);
+			if (FName.CompareTo(other.FName) == 0) { //same first names
+				if (BDay.CompareTo(other.BDay) == 0) { // same Bdays
+					return Id.CompareTo(other.Id);
+				}
+				else return BDay.CompareTo(other.BDay);
 			}
 			else return FName.CompareTo(other.FName); //same last names, but different first names
 		}
@@ -71,12 +74,14 @@ class Program {
 		Person p3 = new Person("Caesar", "Cipuvic", new DateTime(1993, 12, 31));
 		Person p4 = new Person("Dora", "Dollinger", new DateTime(1993, 12, 30));
 		Person p5 = new Person("Bernhard", "Berger", new DateTime(1996, 1, 1));
+		Person p6 = new Person("Bernhard", "Berger", new DateTime(1996, 1, 1));
 		List<Person> list = new List<Person>(4);
 		list.Add(p5);
 		list.Add(p4); 	 //only references are stored in the array!
 		list.Add(p3); 
 		list.Add(p2); 
 		list.Add(p1); 
+		list.Add(p6);
 		list.Sort(); //uses Person.CompareTo!
 		Console.WriteLine("According to last names: ");
 		foreach (Person p in list) {
