@@ -10,7 +10,7 @@ class MainClass {
 			//Test if Queue is actually Min-Heap (smallest DateTime is element of Peak())
 			TaskManager test = new TaskManager();
 
-			test.GetNextTask(); //This would throw an exception
+			//test.GetNextTask(); //This would throw an exception
 
 			Task firstTask = new Task(new DateTime(2015, 4, 10), "First");
 			Task secondTask = new Task(new DateTime(2015, 4, 20), "Second");
