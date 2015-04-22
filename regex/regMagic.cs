@@ -3,7 +3,6 @@ using System.Text.RegularExpressions;
 
 class regularMagic
 {
-
 	static void Main()
 	{
 		string toShrink = "AaaaddddDDDEfffxxyZZZZZ";
@@ -15,9 +14,9 @@ class regularMagic
 	*	() -> Capture the pattern within as a group
 	*	. -> Math any character excpet line feed (move one line forward, new line)
 	*	\1 -> Match the same character as captured before
-	*	* -> Now repeat that match 0 or more times again
+	*	{3,} -> Now find that match for length of 3 or more
 	*
-	*	Basically im fetching every character, but grouping runs of them into groups
+	*	Basically im fetching every character, but grouping runs of them into groups of length 3 or more
 	*
 	*/
 }
