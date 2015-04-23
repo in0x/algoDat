@@ -6,8 +6,8 @@ class regularMagic
 	static void Main()
 	{
 		string toShrink = "AaaaddddDDDEfffxxyZZZZZ";
-		string shrunk = Regex.Replace(toShrink, @"(.)\1{3,}", Match => "$1#" + Match.Value.Length + "#");
-		Console.WriteLine(shrunk + " " + toShrink.Length + " " + shrunk.Length);
+		string shrunk = Regex.Replace(toShrink, @"(.)\1{3,}", Match => Match.Groups[1].Value + "#" + Match.Value.Length + "#");
+		Console.WriteLine(shrunk);
 	}
 	/*
 	*	Regex Explenation
