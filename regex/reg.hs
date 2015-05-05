@@ -1,5 +1,3 @@
--- $ get precedence after $, for avoiding parantheses
-
 import Text.Regex.Posix
 
 textMoz, patternMoz, textIE, patternIE :: String 

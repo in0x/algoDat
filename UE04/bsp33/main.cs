@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 
 class Post2Infix {
 	static void Main(string[] args) {
@@ -8,6 +9,10 @@ class Post2Infix {
 			if (args.Length == 0)
 				throw new ArgumentException("Usage:\n\tmain.exe [postfix expression]");
 			runTests();
+
+			if (Regex.Matches(args[0] ,@"\d\d").Count != 0)
+				throw new InvalidOperationException();
+			
 			Console.WriteLine(PostFix2Infix(args[0]));
 		} catch (InvalidOperationException) {
 			Console.WriteLine("You did not enter a valid postfix expression");
@@ -28,6 +33,8 @@ class Post2Infix {
 				string exp = current + " " + expressions.Pop() + ")";
 				exp = "(" + expressions.Pop() + " " + exp;
 				expressions.Push(exp);
+			} else {
+				throw new InvalidOperationException();
 			}
 		}
 
