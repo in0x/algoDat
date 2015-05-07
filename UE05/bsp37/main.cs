@@ -17,31 +17,23 @@ class MainClass {
 		labPath.mapLabyrinth(new Node(2,1,0));
 		labPath.print();
 		Console.WriteLine(labPath.buildPath(new Node(2, 5, 0)));
+		
+		test(labPath);
+		test(labPath);
 
-		Random rand = new Random();
-		//// Test 1 ////
+	}
+	
+	static void test(BFS labPath) {
 		Console.WriteLine("\nGenerating Test Lab");
-		Node start = labPath.genLab();
+		Tuple<Node, Node> targets = labPath.genLab();
 		labPath.print();
 		
 		Console.WriteLine("\nSolving");
-		labPath.mapLabyrinth(start);
+		labPath.mapLabyrinth(targets.Item1);
 		labPath.print();
-		Node target = new Node(rand.Next(6), rand.Next(6), 0);
-		Console.WriteLine("Target y: " + target.y + " x: " + target.x);
-		Console.WriteLine(labPath.buildPath(target));
-
-		//// Test 2 ////
-		Console.WriteLine("\nGenerating Test Lab");
-		start = labPath.genLab();
-		labPath.print();
-		
-		Console.WriteLine("\nSolving");
-		labPath.mapLabyrinth(start);
-		labPath.print();
-		target = new Node(rand.Next(6), rand.Next(6), 0);
-		Console.WriteLine("Target y: " + target.y + " x: " + target.x);
-		Console.WriteLine(labPath.buildPath(target));
+		labPath.checkTarget(ref targets);
+		Console.WriteLine("Target y: " + targets.Item2.y + " x: " + targets.Item2.x);
+		Console.WriteLine(labPath.buildPath(targets.Item2));
 	}
 }
 
@@ -106,7 +98,7 @@ class BFS {
 	private bool findNext(ref Node current, Node next) {
 		if (current.x + next.x == -1 || current.y + next.y == -1 || current.x + next.x > lab.GetLength(1) - 1 || current.y + next.y > lab.GetLength(0) - 1)
 			return false;
-		if (lab[current.y + next.y, current.x + next.x] == "x")
+		if (lab[current.y + next.y, current.x + next.x] == "x" || lab[current.y + next.y, current.x + next.x] == "u")
 			return false;
 		if (Convert.ToInt32(lab[current.y + next.y, current.x + next.x]) == Convert.ToInt32(lab[current.y, current.x]) - 1) {
 			current = current.Add(next);
@@ -136,14 +128,13 @@ class BFS {
 		return ReverseString(path);
 	}
 
-	public string ReverseString(string s)
-    {
+	private string ReverseString(string s) {
 		char[] arr = s.ToCharArray();
 		Array.Reverse(arr);
 		return new string(arr);
     }
 	
-	public Node genLab() {	
+	public Tuple<Node, Node> genLab() {	
 		for (int y = 0; y < lab.GetLength(0); y++) {
 			for (int x = 0; x < lab.GetLength(1); x++) {
 				if (rand.Next(11) > 2) 
@@ -155,7 +146,18 @@ class BFS {
 
 		Node start = new Node(rand.Next(6), rand.Next(6), 0);
 		lab[start.y, start.x] = "*";
-		return start;
+		
+		Node target = new Node(rand.Next(6), rand.Next(6), 0);
+		while(lab[target.y, target.x] == "x" || (target.x == start.x && target.y == start.y))
+			target = new Node(rand.Next(6), rand.Next(6), 0);
+		
+		return new Tuple<Node, Node>(start, target);
+	}
+	
+	public void checkTarget(ref Tuple<Node, Node> targets) {
+		while (lab[targets.Item2.y, targets.Item2.x] == "u" || lab[targets.Item2.y, targets.Item2.x] == "x" || (targets.Item2.x == targets.Item1.x && targets.Item2.y == targets.Item1.y))
+			targets = new Tuple<Node,Node>(targets.Item1, new Node(rand.Next(6), rand.Next(6), 0));
+		return;
 	}
 }
 
