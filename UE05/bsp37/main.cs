@@ -18,22 +18,30 @@ class MainClass {
 		labPath.print();
 		Console.WriteLine(labPath.buildPath(new Node(2, 5, 0)));
 
-		Console.WriteLine("Generating Test Lab");
+		Random rand = new Random();
+		//// Test 1 ////
+		Console.WriteLine("\nGenerating Test Lab");
 		Node start = labPath.genLab();
 		labPath.print();
 		
-		Console.WriteLine("Solving");
+		Console.WriteLine("\nSolving");
 		labPath.mapLabyrinth(start);
 		labPath.print();
+		Node target = new Node(rand.Next(6), rand.Next(6), 0);
+		Console.WriteLine("Target y: " + target.y + " x: " + target.x);
+		Console.WriteLine(labPath.buildPath(target));
 
-		Console.WriteLine("Generating Test Lab");
+		//// Test 2 ////
+		Console.WriteLine("\nGenerating Test Lab");
 		start = labPath.genLab();
 		labPath.print();
 		
-		Console.WriteLine("Solving");
+		Console.WriteLine("\nSolving");
 		labPath.mapLabyrinth(start);
 		labPath.print();
-
+		target = new Node(rand.Next(6), rand.Next(6), 0);
+		Console.WriteLine("Target y: " + target.y + " x: " + target.x);
+		Console.WriteLine(labPath.buildPath(target));
 	}
 }
 
