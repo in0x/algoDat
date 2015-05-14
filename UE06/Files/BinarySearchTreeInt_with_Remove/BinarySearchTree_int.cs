@@ -85,6 +85,81 @@ class BinarySearchTree{
 		}
 	}
 	
+	//Removes the node with given data according to the lecture.
+	//Returns false if data is not contained.
+	public bool Remove(int data) {
+		TreeNode parent = null;
+		TreeNode act = Root;
+		
+		// Search the node to be removed:
+		while (act != null) {
+			if (act.Data == data)
+				break;
+				
+			parent = act; //not equal
+
+			if (data < act.Data)
+				act = act.Left;
+			else if (data > act.Data )
+				act = act.Right;
+		}
+		
+		// Nothing to remove, tree was empty or data not present
+		if (act == null) return false;
+
+		//We will remove act; parent is its parent.
+		
+		// There is no right child of act (node to be deleted)
+		if (act.Right == null) {
+			// We remove the root of our tree
+			if (parent == null) {
+				Debug.Assert(Root == act);
+				// Also works if act.Left is null (act is the node to delete)
+				Root = act.Left; //might be null
+			}
+			// Otherwise: we remove left or right subtree of the parent
+			else if (parent.Left == act) //Is act a left child...
+					parent.Left = act.Left;
+			else if (parent.Right == act) //...or a right child?
+					parent.Right = act.Left;
+			else Debug.Assert(false);
+		}		
+		else { // There is a right child of act
+			Debug.Assert(act.Right != null);
+			//leftest is the node with smallest data in the right subtree of act:
+			TreeNode leftest = act.Right; 
+			//parentOfLeftest is the parent of leftest
+			TreeNode parentOfLeftest = act;
+			
+			// Find the leftest node of the node to be 
+			// deleted (act), and the parent node of leftest:
+			while (leftest.Left != null) {
+				parentOfLeftest = leftest;
+				leftest = leftest.Left;
+			}
+			Debug.Assert(leftest != null);
+			Debug.Assert(leftest.Left == null); //otherwise it couldn't be the leftest
+
+			// Move data from below upwards
+			act.Data = leftest.Data;
+
+			// Update parentOfLeftest reference to leftest (as leftest moves up)
+			// Note:
+			//   - also works if leftest.Right === null
+			//   - also works if parentOfLeftest == act (node to be deleted)
+			if (parentOfLeftest.Left == leftest ) //Is leftest a left child of its parent...
+				parentOfLeftest.Left = leftest.Right; //might be null
+			if (parentOfLeftest.Right == leftest ) { //...or a right child of its parent.
+				//In this case, parentOfLeftest must be act, 
+				//because otherwise leftest would have a greater key than parentOfLeftest.
+				Debug.Assert(parentOfLeftest == act); 
+				parentOfLeftest.Right = leftest.Right;
+			}
+		}
+		return true;
+	}
+	
+	
 	//Returns the node with given key. If not existent, it returns null.
 	public TreeNode Find(int data) {
 		TreeNode act = Root;

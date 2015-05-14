@@ -51,5 +51,8 @@ class BinarySearchTree_Main {
 		
 		Console.WriteLine("Sorted (inorder) output: ");
 		t.PrintTreeInorder(t.Root);
+		t.Remove(5440);
+		Console.WriteLine("Sorted (inorder) output after removal of 5440: ");
+		t.PrintTreeInorder(t.Root);
 	}
 }
