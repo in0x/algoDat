@@ -5,29 +5,98 @@ using System.Diagnostics;
 class MainClass {
 	static void Main() {
 		
+		SortArray test_x = new SortArray('x');
+		SortArray test_y = new SortArray('y');
+
+		TimeSpan start = Process.GetCurrentProcess().TotalProcessorTime;
+		for (int i = 0; i < 1000000; i++) {
+			GameObject go = new GameObject();
+			test_x.Add(go);
+			test_y.Add(go);
+		}
+		test_x.Sort();
+		test_y.Sort();
+		TimeSpan end = Process.GetCurrentProcess().TotalProcessorTime;
+		double passed = (end-start).TotalMilliseconds;
+		Console.WriteLine("\nFinished inserting and sorting in " + passed + " ms\n");
+		
+		test_x = test_x.GetViewBetween(new GameObject(40,0), new GameObject(60,0));
+		test_y = test_y.GetViewBetween(new GameObject(0,40), new GameObject(0,50));
+
+		start = Process.GetCurrentProcess().TotalProcessorTime;
+		test_x.IntersectWith(test_y);
+		end = Process.GetCurrentProcess().TotalProcessorTime;
+		passed = (end-start).TotalMilliseconds;
+		Console.WriteLine("\nFinished intersecting in " + passed + " ms\n");
+
+		test_x.Print();
+
 	}
 }
 
-class QuickSortArray {
-	
-	List<T> elements;
+class SortArray {
+	private List<GameObject> elements {get; set;}
+	private char SortEl;
 
-	public QuickSortArray(data T) {
-		elements = new List<T>();
+	public SortArray(char s) {
+		elements = new List<GameObject>();
+		SortEl = s;
 	}
 
-	/* private void partition() {
-
+	public SortArray(char s, List<GameObject> li) {
+		SortEl = s;
+		elements = li;
 	}
 
-	private void Shuffle() {
-
+	public void Add(GameObject data) {
+		elements.Add(data);
 	}
 
-	private void Sort() {
+	public SortArray GetViewBetween(GameObject lower, GameObject upper){
+		return new SortArray(SortEl, elements.FindAll(delegate(GameObject current){
+				if (SortEl == 'x')
+					return (current.x > lower.x && current.x < upper.x);
+				else 	
+					return (current.y > lower.y && current.y < upper.y);
+		}));
+	}
 
-	} */
+	public void IntersectWith(SortArray other) {
+		List<GameObject> smaller;
+		List<GameObject> larger;
+		List<GameObject> temp = new List<GameObject>();
+		if (elements.Count < other.elements.Count) {
+			smaller = elements;
+			larger = other.elements;
+		} else {
+			smaller = other.elements;
+			larger = elements;
+		}
+
+		smaller.ForEach(delegate(GameObject go) {
+			if (larger.BinarySearch(go) > 0)
+				temp.Add(go);
+		});
+		
+		elements = temp;
+		Console.WriteLine(temp.Count);
+	}
+
+	public void Sort() {
+		if (SortEl == 'x')
+			elements.Sort(new xComparer());
+		else
+			elements.Sort(new yComparer());
+	}
+
+	public void Print() {
+		foreach (GameObject go in elements)
+			Console.WriteLine("x: " +  go.x + "\ty: " + go.y); 
+		
+	}
 }
+
+
 
 class GameObject : IComparable {
 	public double x;

@@ -54,5 +54,8 @@ class BinarySearchTree_Main {
 		t.Remove(5440);
 		Console.WriteLine("Sorted (inorder) output after removal of 5440: ");
 		t.PrintTreeInorder(t.Root);
+
+		Console.WriteLine("\nPrinting in PostOrder\n");
+		t.PrintTreePostOrder(t.Root);
 	}
 }

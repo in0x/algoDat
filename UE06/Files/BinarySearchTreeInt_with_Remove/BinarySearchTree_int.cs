@@ -237,6 +237,13 @@ class BinarySearchTree{
 		}
 		Console.WriteLine();
 	}
+
+	public void PrintTreePostOrder(TreeNode actRoot) {
+		if (actRoot == null) return;
+		PrintTreePostOrder(actRoot.Left);
+		PrintTreePostOrder(actRoot.Right);
+		Console.Write(actRoot.Data + " ");
+	}
 	
 	
 	//Graphical preorder-style output with recursion.

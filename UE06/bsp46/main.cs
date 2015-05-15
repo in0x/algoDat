@@ -22,7 +22,7 @@ class MainClass {
 
 		SortedSet<GameObject> x_select = x_sort.GetViewBetween(new GameObject(0,0), new GameObject(50,0));
 		SortedSet<GameObject> y_select = y_sort.GetViewBetween(new GameObject(0,0), new GameObject(0,50));
-
+		
 		/*foreach (GameObject go in x_select) 
 			Console.WriteLine("x: " + go.x + "\ty: "  + go.y);
 
