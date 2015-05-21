@@ -92,7 +92,6 @@ class SortArray {
 	public void Print() {
 		foreach (GameObject go in elements)
 			Console.WriteLine("x: " +  go.x + "\ty: " + go.y); 
-		
 	}
 }
 

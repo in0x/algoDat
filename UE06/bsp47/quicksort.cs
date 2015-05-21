@@ -1,3 +1,18 @@
+using System;
+using System.Collections.Generic;
+
+class MainClass {
+	static void Main() {
+		QuickSortArray test = new QuickSortArray('x');
+
+		for (int i = 0; i < 10; i++)
+			test.Add(new GameObject());
+
+		test.QuickSort();
+
+	}
+}
+
 class QuickSortArray {
 	
 	private List<GameObject> elements;
@@ -31,8 +46,11 @@ class QuickSortArray {
 
 	 private int partition(int left, int right) {  
 
+	     //int i = left, 
+	     	// j = right;    
+
 	     int i = left, 
-	     	 j = right;    
+	     	 j = right + 1;
 
 	    GameObject temp = elements[left];          
 	    while (true) {  
@@ -77,5 +95,54 @@ class QuickSortArray {
 	public void Print() {
 		foreach (GameObject data in elements) 
 			Console.WriteLine("x: " + data.x + "\ty: " + data.y);
+	}
+}
+
+
+
+class GameObject : IComparable {
+	public double x;
+	public double y;
+	public int ID;
+	static int ID_Counter = 0;
+	static Random rand = new Random();
+
+	public GameObject() {
+		x = rand.Next(0, 101);
+		y = rand.Next(0, 101);
+		ID = ID_Counter;
+		ID_Counter++;
+	}
+
+	public GameObject(double _x, double _y) {
+		x = _x;
+		y = _y;
+		ID = ID_Counter;
+		ID_Counter++;
+	}
+
+	public int CompareTo(Object o) {
+		GameObject other = o as GameObject;
+		if (other == null)
+			throw new ArgumentException("Comparing to non-GameObject");
+
+		if (x.CompareTo(other.x) == 0) {
+			if (y.CompareTo(other.y) == 0) 
+				return ID.CompareTo(other.ID);
+			else return y.CompareTo(other.y);
+		} else 
+			return x.CompareTo(other.x);
+	}
+}
+
+class xComparer : IComparer<GameObject> {
+	public int Compare(GameObject go1, GameObject go2) {
+		return go1.x.CompareTo(go2.x);
+	}
+}
+
+class yComparer : IComparer<GameObject> {
+	public int Compare(GameObject go1, GameObject go2) {
+		return go1.y.CompareTo(go2.y);
 	}
 }
