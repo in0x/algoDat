@@ -1,0 +1,47 @@
+for 0 -> 1048576 elements
+
+Times with random pivot
+
+Elements: 1 	Time: 0,192
+Elements: 2 	Time: 0,564
+Elements: 4 	Time: 0,013
+Elements: 8 	Time: 0,003
+Elements: 16 	Time: 0,007
+Elements: 32 	Time: 0,018
+Elements: 64 	Time: 0,037
+Elements: 128 	Time: 0,086
+Elements: 256 	Time: 0,198
+Elements: 512 	Time: 0,471
+Elements: 1024 	Time: 1,003
+Elements: 2048 	Time: 2,839
+Elements: 4096 	Time: 5,962
+Elements: 8192 	Time: 9,75
+Elements: 16384 	Time: 21,923
+Elements: 32768 	Time: 48,955
+Elements: 65536 	Time: 95,482
+Elements: 131072 	Time: 215,122
+Elements: 262144 	Time: 465,482
+Elements: 524288 	Time: 985,723
+
+Times with median pivot
+
+Elements: 1 	Time: 0,077
+Elements: 2 	Time: 1,345
+Elements: 4 	Time: 0,008
+Elements: 8 	Time: 0,064
+Elements: 16 	Time: 0,011
+Elements: 32 	Time: 0,02
+Elements: 64 	Time: 0,044
+Elements: 128 	Time: 0,121
+Elements: 256 	Time: 0,222
+Elements: 512 	Time: 0,628
+Elements: 1024 	Time: 1,335
+Elements: 2048 	Time: 3,285
+Elements: 4096 	Time: 4,813
+Elements: 8192 	Time: 10,486
+Elements: 16384 	Time: 26,493
+Elements: 32768 	Time: 48,946
+Elements: 65536 	Time: 105,288
+Elements: 131072 	Time: 226,915
+Elements: 262144 	Time: 486,366
+Elements: 524288 	Time: 1043,381
