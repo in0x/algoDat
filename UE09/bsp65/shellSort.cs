@@ -4,16 +4,17 @@
 using System;
 using System.Diagnostics;
 using System.Collections.Generic;
+using System.IO;
 
 class MainClass {
 	static void Main() {
-		//testRunTime();
+		testRunTime();
 		TestSort.runTest();
 	}
 
 	static void testRunTime() {
 		Random rand = new Random();
-		const int tests = 18;
+		const int tests = 11;
 
 		List<double> qs_times = new List<double>(tests);
 		List<double> shs_times = new List<double>(tests);
@@ -22,17 +23,17 @@ class MainClass {
 		//	Console.WriteLine(x);
 		//});
 
-		for (int i = 12; i < tests; i++) {
-			List<double> test = new List<double>((int)Math.Pow(2,i));
+		for (int i = 0; i < tests; i++) {
+			List<double> test = new List<double>(10000 * i);
 			List<double> forShell = new List<double>(test.Capacity);
 
 			for (int num = 0; num < test.Capacity; num++) {
-				double r = rand.Next(0,10000);
+				double r = rand.Next(0, 10000 * i);
 				test.Add(r);
 				forShell.Add(r);
 			}
 
-			Console.WriteLine("\n" + Math.Pow(2,i) + "\n");	
+			Console.WriteLine("\n" + 10000 * i + "\n");	
 			TimeSpan start = Process.GetCurrentProcess().TotalProcessorTime;
 			SortingAlgos<double>.HibbardShellSort(forShell);
 			TimeSpan end = Process.GetCurrentProcess().TotalProcessorTime;
@@ -46,8 +47,11 @@ class MainClass {
 			qs_times.Add(passed);
 			Console.WriteLine("Pass done:" + i);
 		}
-		printFancyTable(qs_times);
-		printFancyTable(shs_times);
+		StreamWriter sw = new StreamWriter(@"out.txt");
+		printTable(qs_times, tests, sw);
+		sw.WriteLine();
+		printTable(shs_times, tests, sw);
+		sw.Close();
 	}
 
 	static void printFancyTable(List<double> arr) {
@@ -67,8 +71,13 @@ class MainClass {
 			for (int space = 0; space <= maxLength+1 - line.Length; space++)
 				line += " ";
 			Console.Write(line + " |\n");
+		}		
+	}
+
+	static void printTable(List<double> arr, int length, StreamWriter sw) {
+		for (int i = 0; i < length; i++) {
+			sw.WriteLine((10000 * i) / 1000 + " \t" + arr[i] / 1000);
 		}
-		
 	}
 }
 
@@ -79,6 +88,7 @@ static class TestSort {
 		for (int i = 0; i < testCase.Capacity; i++) 
 			testCase.Add(rand.Next(0,101));
 		HibbardShellSortTesting(testCase);
+		//SortingAlgos<double>.Print(testCase);
 	}
 
 	public static void HibbardShellSortTesting(List<double> arr) {
@@ -94,17 +104,22 @@ static class TestSort {
 					arr[k] = arr[k-h];  // move elements h slots backward
 				arr[k] = elem ; //insert elem into the now free slot
 				//Debug
-				Debug.Assert(isSorted(arr, (int)Math.Pow(2, h) - 1), "Not sorted");
 			}
+			Debug.Assert(isSorted(arr, (int)Math.Pow(2, h) - 1), "Not sorted");
 		} while (h > 1);
 	}
 
 	public static bool isSorted(List<double> arr, int stride) {
-		for (int i = 0; i+stride < arr.Capacity; i++) {
-			if (arr[i] < arr[i+stride])
-				continue;
-			else
-				return false;
+		//Check if h- subsequence is sorted
+		// i.e 1 2 5 4 3 8 9 6 would be 3-sorted
+		// from 0 until index + stride is larger than count check if index + stride, then index++ subsquence is sorted 
+		for (int i = 0; i + stride > arr.Count; i++) {
+			for (int span = i; span + stride < arr.Count; i += stride) {
+				if (arr[span] < arr[span + stride])
+					continue;
+				else 
+					return false;
+			}
 		}
 		return true;
 	}
