@@ -1,13 +1,9 @@
 /* 141061024, fhs37246
    * Philipp Welsch
-   * ue09 bsp67    */
+   * ue10 bsp67    */
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-
-//Sorting: O(n*log(n))
-//Get Elements between: O(n)
-//Intersecting: O(n*log(n))
 
 class MainClass {
 	static void Main() {
@@ -153,44 +149,6 @@ class SortArray {
 		return elements.IndexOf(sd);
 	}
 
-	//Create custom binary search that finds first elements which is larger  
-	public SortArray GetViewBetween(Schedule span){
-		return new SortArray(elements.FindAll(delegate(Schedule current){
-				if (comparer.GetType() == typeof(arriveComparer))
-					return (current.arrival.CompareTo(span.arrival) > 0 && current.arrival.CompareTo(span.departure) < 0);
-				else 	
-					return (current.departure.CompareTo(span.arrival) > 0 && current.departure.CompareTo(span.departure) < 0);
-		}), comparer);
-	} 
-
-	public List<Schedule> IntersectWith(SortArray other) {
-		List<Schedule> smaller;
-		List<Schedule> larger;
-		List<Schedule> temp = new List<Schedule>();
-		if (elements.Count < other.elements.Count) {
-			smaller = elements;
-			larger = other.elements;
-		} else {
-			smaller = other.elements;
-			larger = elements;
-		}
-
-		smaller.ForEach(delegate(Schedule sd) {
-			int index = larger.BinarySearch(sd);
-			if ( index >= 0 && index < larger.Capacity - 1)
-				temp.Add(sd);
-		});	
-		return temp;
-	}
-
-	//Wrong, need to find first 
-	public void GetViewBetweenNew(Schedule span) {
-		int splitBefore = binaryLimitSearch(span.arrival);//Console.WriteLine(split + "  " + (elements.Count - split - 1));
-		elements.RemoveRange(0, splitBefore);
-		int splitAfter = binaryLimitSearch(span.departure);
-		elements.RemoveRange(splitAfter, elements.Count - splitAfter);
-	} 
-
 	private int binaryLimitSearch(Time limit) {
 		int left = 0;
 		int right = elements.Count;
@@ -217,6 +175,33 @@ class SortArray {
 		}
 		//If not found return the element after mid, which is the first larger one
 		return left;
+	}
+
+	public void GetViewBetweenNew(Schedule span) {
+		int splitBefore = binaryLimitSearch(span.arrival);//Console.WriteLine(split + "  " + (elements.Count - split - 1));
+		elements.RemoveRange(0, splitBefore);
+		int splitAfter = binaryLimitSearch(span.departure);
+		elements.RemoveRange(splitAfter, elements.Count - splitAfter);
+	} 
+
+	public List<Schedule> IntersectWith(SortArray other) {
+		List<Schedule> smaller;
+		List<Schedule> larger;
+		List<Schedule> temp = new List<Schedule>();
+		if (elements.Count < other.elements.Count) {
+			smaller = elements;
+			larger = other.elements;
+		} else {
+			smaller = other.elements;
+			larger = elements;
+		}
+
+		smaller.ForEach(delegate(Schedule sd) {
+			int index = larger.BinarySearch(sd);
+			if ( index >= 0 && index < larger.Capacity - 1)
+				temp.Add(sd);
+		});	
+		return temp;
 	}
 
 	public void Sort() {

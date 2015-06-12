@@ -75,10 +75,14 @@ class SortingAlgos<T> where T : IComparable {
 	}
 
 	public static void HibbardShellSort(List<T> arr) {
+		//Use 2^exponent for sorting, not exponent itself
+		// at the beginning calculate first power of 2 bigger than lenght, then -1 and cont. halve it (15 -> 7 -> 3 -> etc.)
 		int h = 1;
+		int exp = 1;
 		while (Math.Pow(2,h) - 1 < arr.Count) h++; //find max. distance
 		do {	
-			h--;
+			exp--;
+			h = Math.Pow(2, exp);
 			Console.WriteLine("h: " + h + ", Distance: " + (Math.Pow(2, h) - 1));
 			for (int i = (int)Math.Pow(2, h) - 1; i < arr.Count; i++) {
 				T elem = arr[i]; //current element
